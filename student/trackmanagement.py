@@ -136,12 +136,24 @@ class Trackmanagement:
 
         # delete old tracks   
         for track in self.track_list:
+            """
             if track.state == 'confirmed':
                 if track.score < params.delete_threshold or (track.P[0,0]>params.max_P or track.P[1,1]>params.max_P):
                     self.delete_track(track)
             else:
                 if track.score < 0.1 or (track.P[0,0]>params.max_P or track.P[1,1]>params.max_P):
                     self.delete_track(track)
+            """
+            P_of_x = track.P[0, 0]
+            P_of_y = track.P[1, 1]
+            P_ave = np.sqrt(P_of_x**2 + P_of_y**2)
+            if track.state == 'confirmed':
+                if track.score < params.delete_threshold or P_ave > params.max_P:
+                    self.delete_track(track)
+            else:
+                if track.score < 0.1 or P_ave > params.max_P:
+                    self.delete_track(track)
+        
                 
         ############
         # END student code
