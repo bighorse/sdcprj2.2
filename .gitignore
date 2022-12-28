@@ -3,3 +3,4 @@ results
 tools
 misc/__pycache__/
 student/__pycache__/
+.DS_Store
